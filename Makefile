@@ -1,10 +1,10 @@
-CC=gcc
+CC=clang
 
 WARN= -Wall -Wextra -Wno-unused-parameter -Wno-deprecated-declarations -Wformat-security -Wformat -Werror=format-security -Wstack-protector
 SEC= -march=native -fstack-protector-all --param ssp-buffer-size=4 -fpie -ftrapv -D_FORTIFY_SOURCE=2
 
-CFLAGS= ${SEC} ${WARN} -std=c99 -pedantic -O2 -I/usr/include/freetype2 -DXINERAMA
-LDFLAGS= -lX11 -lXinerama -lXft -lfontconfig -Wl,-z,relro,-z,now -pie
+CFLAGS= ${SEC} ${WARN} -std=c99 -pedantic -O2 -I/usr/local/include -I/usr/local/include/freetype2 -DXINERAMA
+LDFLAGS= -L/usr/local/lib -lX11 -lXft -lXinerama -lfontconfig -Wl,-z,relro,-z,now -pie
 
 SRC = ./src/src.c ./src/swm.c ./src/util.c
 OBJECT = src.o swm.o util.o
@@ -24,10 +24,10 @@ clean:
 	@rm -rf swm *.o *~
 
 install: all
-	@echo installing executable file to /usr/bin
-	@mkdir -p /usr/bin
-	@cp -f swm /usr/bin
-	@chmod 755 /usr/bin/swm
+	@echo installing executable file to /usr/local/bin
+	@mkdir -p /usr/local/bin
+	@cp -f swm /usr/local/bin
+	@chmod 755 /usr/local/bin/swm
 
 uninstall:
 	@echo removing executable file from /usr/bin
