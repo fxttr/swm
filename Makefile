@@ -3,8 +3,8 @@ CC=clang
 WARN= -Wall -Wextra -Wno-unused-parameter -Wno-deprecated-declarations -Wformat-security -Wformat -Werror=format-security -Wstack-protector
 SEC= -march=native -fstack-protector-all --param ssp-buffer-size=4 -fpie -ftrapv -D_FORTIFY_SOURCE=2
 
-CFLAGS= ${SEC} ${WARN} -std=c99 -pedantic -O2 -I/usr/local/include -I/usr/local/include/freetype2 -DXINERAMA
-LDFLAGS= -L/usr/local/lib -lX11 -lXft -lXinerama -lfontconfig -Wl,-z,relro,-z,now -pie
+CFLAGS= ${SEC} ${WARN} -std=c99 -pedantic -O2 -I/usr/X11R6/include -I/usr/X11R6/include/freetype2 -DXINERAMA
+LDFLAGS= -L/usr/X11R6/lib -lX11 -lXft -lXinerama -lfontconfig -Wl,-z,relro,-z,now -pie
 
 SRC = ./src/src.c ./src/swm.c ./src/util.c
 OBJECT = src.o swm.o util.o
