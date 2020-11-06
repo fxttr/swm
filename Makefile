@@ -9,6 +9,7 @@ LDFLAGS= -L/usr/X11R6/lib -lX11 -lXft -lXinerama -lfontconfig -Wl,-z,relro,-z,no
 SRC = ./src/src.c ./src/swm.c ./src/util.c
 OBJECT = src.o swm.o util.o
 
+
 all: _swm_
 	@echo CC -o swm
 	@${CC} ${OBJECT} -o swm ${LDFLAGS}
