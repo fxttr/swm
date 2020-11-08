@@ -85,8 +85,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { TERM, NULL };
 static const char *filecmd[]    = { TERM, "-e", "ranger", NULL };
 static const char *editorcmd[] = { "emacs", NULL };
-static const char *volcmdp[] = { "amixer", "-c1", "-M", "set", "Master", "5+", NULL };
-static const char *volcmdm[] = { "amixer", "-c1", "-M", "set", "Master", "5-", NULL };
+static const char *volcmdp[] = { "sndioctl", "output.level=+0.05", NULL };
+static const char *volcmdm[] = { "sndioctl", "output.level=-0.05", NULL };
 static const char *xlock[] = { "slock", NULL };
 
 static Key keys[] = {
