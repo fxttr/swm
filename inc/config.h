@@ -7,15 +7,15 @@
 #define NUMCOLORS         9
 static const char colors[NUMCOLORS][MAXCOLORS][9] = {
     // border - foreground - background
-    { "#212121", "#9D9DC1", "#121212" },        /* [0]  01 - Client normal */
-    { "#696969", "#6999FF", "#121212" },        /* [1]  02 - Client selected */
-    { "#212121", "#CF4F88", "#121212" },        /* [2]  03 - Client urgent */
-    { "#212121", "#53A6A6", "#121212" },        /* [3]  04 - Client occupied */
-    { "#212121", "#914E89", "#121212" },        /* [4]  05 - Red */
-    { "#212121", "#4779B3", "#121212" },        /* [5]  06 - Yellow */
-    { "#212121", "#47959E", "#121212" },        /* [6]  07 - Green */
-    { "#212121", "#7E62B3", "#121212" },        /* [7]  08 - Dark grey */
-    { "#212121", "#899CA1", "#121212" },        /* [8]  09 - grey */
+    { "#948ae3", "#f7f1ff", "#222222" },        /* [0]  01 - Client normal */
+    { "#fc618d", "#fc618d", "#222222" },        /* [1]  02 - Client selected */
+    { "#948ae3", "#CF4F88", "#222222" },        /* [2]  03 - Client urgent */
+    { "#948ae3", "#53A6A6", "#222222" },        /* [3]  04 - Client occupied */
+    { "#948ae3", "#914E89", "#222222" },        /* [4]  05 - Red */
+    { "#948ae3", "#4779B3", "#222222" },        /* [5]  06 - Yellow */
+    { "#948ae3", "#47959E", "#222222" },        /* [6]  07 - Green */
+    { "#948ae3", "#7E62B3", "#222222" },        /* [7]  08 - Dark grey */
+    { "#948ae3", "#899CA1", "#222222" },        /* [8]  09 - grey */
 };
 static const unsigned int gappx = 6; /* gap pixel between windows */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
@@ -25,12 +25,12 @@ static const char *fonts[] = {
 	"Terminus Bold:size=12"
 };
 static const char dmenufont[]       = "Terminus Bold:size=10";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#000000";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#af8700";
-static const char selbgcolor[]      = "#000000";
-static const char selfgcolor[]      = "#29A3FA";
+static const char normbordercolor[] = "#948ae3";
+static const char normbgcolor[]     = "#121212";
+static const char normfgcolor[]     = "#f7f1ff";
+static const char selbordercolor[]  = "#fc618d";
+static const char selbgcolor[]      = "#222222";
+static const char selfgcolor[]      = "#fc618d";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -42,9 +42,9 @@ static const Bool systraypinning = True;
 static const Bool systraypinningfailfirst = True;
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", ""};
 
-static int def_layouts[1 + LENGTH(tags)]  = { 0, 2, 0, 0, 1, 0, 0, 0, 0, 0};
+static int def_layouts[1 + LENGTH(tags)]  = { 0, 2, 0, 0, 0, 0};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -62,9 +62,9 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]",      tile },    /* first entry is default */
-	{ "<><",      NULL },    /* no layout function means floating behavior */
-	{ "\\",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */
@@ -85,8 +85,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { TERM, NULL };
 static const char *filecmd[]    = { TERM, "-e", "ranger", NULL };
 static const char *editorcmd[] = { "emacs", NULL };
-static const char *volcmdp[] = { "amixer", "-c1", "-M", "set", "Master", "5+", NULL };
-static const char *volcmdm[] = { "amixer", "-c1", "-M", "set", "Master", "5-", NULL };
+static const char *volcmdp[] = { "mixer", "vol",  "+5:+5", NULL };
+static const char *volcmdm[] = { "mixer", "vol",  "-5:-5", NULL };
 static const char *xlock[] = { "slock", NULL };
 
 static Key keys[] = {
