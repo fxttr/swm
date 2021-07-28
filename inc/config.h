@@ -82,6 +82,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *roficmd[] = { "rofi", "-show", "combi", NULL };
 static const char *termcmd[]  = { TERM, NULL };
 static const char *filecmd[]    = { TERM, "-e", "ranger", NULL };
 static const char *editorcmd[] = { "emacs", NULL };
@@ -91,7 +92,7 @@ static const char *xlock[] = { "slock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = filecmd } },
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = editorcmd } },
