@@ -11,7 +11,7 @@ llvmPackages.stdenv.mkDerivation rec {
   src = ./.;
 
   prePatch = ''
-    sed -i "s@/usr/bin@$out@" Makefile
+    sed -i "s@/usr@$out@" Makefile
   '';
 
   nativeBuildInputs = [ gnumake ];
