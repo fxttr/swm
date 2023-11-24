@@ -10,6 +10,10 @@ llvmPackages.stdenv.mkDerivation rec {
 
   src = ./.;
 
+  prePatch = ''
+    sed -i "s@/usr/bin@$out@" Makefile
+  '';
+
   nativeBuildInputs = [ gnumake ];
 
   buildInputs = [
@@ -17,11 +21,6 @@ llvmPackages.stdenv.mkDerivation rec {
     xorg.libXft
     xorg.libXinerama
   ];
-
-  installPhase = ''                                                                               
-    mkdir -p $out/bin
-    cp swm $out/bin
-  '';
 
   meta = with lib; {
     homepage = "https://github.com/fxttr/swm";
