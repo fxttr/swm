@@ -6,28 +6,26 @@
 
 #include "../inc/util.h"
 
-void *
-ecalloc(size_t nmemb, size_t size)
-{
-	void *p;
+void *ecalloc(size_t nmemb, size_t size) {
+  void *p;
 
-	if (!(p = calloc(nmemb, size)))
-		perror(NULL);
-	return p;
+  if (!(p = calloc(nmemb, size)))
+    perror(NULL);
+
+  return p;
 }
 
-void
-die(const char *fmt, ...) {
-	va_list ap;
+void die(const char *fmt, ...) {
+  va_list ap;
 
-	va_start(ap, fmt);
-	vfprintf(stderr, fmt, ap);
-	va_end(ap);
+  va_start(ap, fmt); 
+  vfprintf(stderr, fmt, ap);
+  va_end(ap);
 
-	if (fmt[0] && fmt[strlen(fmt)-1] == ':') {
-		fputc(' ', stderr);
-		perror(NULL);
-	}
+  if (fmt[0] && fmt[strlen(fmt) - 1] == ':') {
+    fputc(' ', stderr);
+    perror(NULL);
+  }
 
-	exit(1);
+  exit(1);
 }
