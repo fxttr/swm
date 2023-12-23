@@ -85,9 +85,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { TERM, NULL };
 static const char *filecmd[]    = { TERM, "-e", "ranger", NULL };
 static const char *editorcmd[] = { "emacs", NULL };
-static const char *volcmdp[] = { "amixer", "-c1", "-M", "set", "Master", "5+", NULL };
-static const char *volcmdm[] = { "amixer", "-c1", "-M", "set", "Master", "5-", NULL };
-static const char *xlock[] = { "slock", NULL };
+static const char *volcmdp[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *volcmdm[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
+static const char *slockcmd[] = { "slock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -97,7 +97,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = editorcmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = volcmdp } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = volcmdm } },
-	{ MODKEY|ShiftMask,		          XK_b,      spawn,          {.v = xlock } },
+	{ MODKEY|ShiftMask,		        XK_b,      spawn,          {.v = slockcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_w,      tabmode,        {-1} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
