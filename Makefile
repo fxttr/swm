@@ -3,7 +3,7 @@ CC=clang
 WARN= -Wall -Wextra -Wno-unused-parameter -Wno-deprecated-declarations -Wformat-security -Wformat -Werror=format-security -Wstack-protector
 SEC= -march=native -fstack-protector-all --param ssp-buffer-size=4 -fpie -ftrapv -D_FORTIFY_SOURCE=2
 
-CFLAGS= ${SEC} ${WARN} -std=c99 -pedantic -O2 -I/usr/include/freetype2 -DXINERAMA
+CFLAGS= ${SEC} ${WARN} -std=c17 -pedantic -O2 -I/usr/include/freetype2 -DXINERAMA
 LDFLAGS= -lX11 -lXinerama -lXft -lfontconfig -Wl,-z,relro,-z,now -pie
 
 SRC = ./src/src.c ./src/swm.c ./src/util.c
