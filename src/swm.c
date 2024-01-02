@@ -2204,6 +2204,8 @@ void tagmon(const Arg *arg)
 		return;
 
 	sendmon(selmon->sel, dirtomon(arg->i));
+	
+	focusmon(arg);
 }
 
 void tile(Monitor *m)
