@@ -45,17 +45,12 @@ static const Bool systraypinning = True;
 static const Bool systraypinningfailfirst = True;
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "" };
 
 static int def_layouts[1 + LENGTH(tags)]  = { 0, 2, 0, 0, 1, 0, 0, 0, 0, 0};
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "pidgin",     NULL,       NULL,       0,            1,           4 },
 };
 
 /* layout(s) */
