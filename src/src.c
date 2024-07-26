@@ -281,7 +281,7 @@ void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h,
 {
 	if (!drw->scheme)
 		return;
-	
+
 	XSetForeground(drw->dpy, drw->gc,
 		       invert ? drw->scheme->bg->pix : drw->scheme->fg->pix);
 
@@ -485,6 +485,7 @@ void drw_cur_free(Drw *drw, Cur *cursor)
 {
 	if (!cursor)
 		return;
+
 	XFreeCursor(drw->dpy, cursor->cursor);
 	free(cursor);
 }
