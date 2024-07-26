@@ -214,7 +214,6 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
-/*static void drawsquare(Bool filled, Bool empty, unsigned long col[ColLast]);*/
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
@@ -299,7 +298,6 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
-static void runAuto();
 
 /* variables */
 static Systray *systray = NULL;
@@ -458,12 +456,6 @@ int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 			*h = MIN(*h, c->maxh);
 	}
 	return *x != c->x || *y != c->y || *w != c->w || *h != c->h;
-}
-
-void runAuto(void)
-{
-	if (!system("cd ~/.swm; ./autostart.sh"))
-		perror("Could not start autostart: ");
 }
 
 void arrange(Monitor *m)
@@ -2943,7 +2935,6 @@ int main(int argc, char *argv[])
 	checkotherwm();
 	setup();
 	scan();
-	runAuto();
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
