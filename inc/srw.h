@@ -2,44 +2,44 @@
 #define DRW_FONT_CACHE_SIZE 32
 
 typedef struct {
-	unsigned long pix;
-	XftColor rgb;
+  unsigned long pix;
+  XftColor rgb;
 } Clr;
 
 typedef struct {
-	Cursor cursor;
+  Cursor cursor;
 } Cur;
 
 typedef struct {
-	Display *dpy;
-	int ascent;
-	int descent;
-	unsigned int h;
-	XftFont *xfont;
-	FcPattern *pattern;
+  Display *dpy;
+  int ascent;
+  int descent;
+  unsigned int h;
+  XftFont *xfont;
+  FcPattern *pattern;
 } Fnt;
 
 typedef struct {
-	Clr *fg;
-	Clr *bg;
-	Clr *border;
+  Clr *fg;
+  Clr *bg;
+  Clr *border;
 } ClrScheme;
 
 typedef struct {
-	unsigned int w, h;
-	Display *dpy;
-	int screen;
-	Window root;
-	Drawable drawable;
-	GC gc;
-	ClrScheme *scheme;
-	size_t fontcount;
-	Fnt *fonts[DRW_FONT_CACHE_SIZE];
+  unsigned int w, h;
+  Display *dpy;
+  int screen;
+  Window root;
+  Drawable drawable;
+  GC gc;
+  ClrScheme *scheme;
+  size_t fontcount;
+  Fnt *fonts[DRW_FONT_CACHE_SIZE];
 } Drw;
 
 typedef struct {
-	unsigned int w;
-	unsigned int h;
+  unsigned int w;
+  unsigned int h;
 } Extnts;
 
 /* Drawable abstraction */
@@ -69,7 +69,7 @@ void drw_setscheme(Drw *, ClrScheme *);
 /* Drawing functions */
 int drw_get_width(Drw *, int, const char *);
 void drw_colored_text(Drw *, ClrScheme *, int, int, int, unsigned int,
-		      unsigned int, char *);
+                      unsigned int, char *);
 void drw_rect(Drw *, int, int, unsigned int, unsigned int, int, int, int);
 int drw_text(Drw *, int, int, unsigned int, unsigned int, const char *, int);
 
