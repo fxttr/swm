@@ -1,5 +1,8 @@
 # Generated files
-.devenv
-.direnv
+.*
+!.clang-format
+!.gitignore
 swm
 result
+compile_commands.json
+*.o
