@@ -23,6 +23,7 @@ static long utf8decodebyte(const char c, size_t *i)
 	for (*i = 0; *i < (UTF_SIZ + 1); ++(*i))
 		if (((unsigned char)c & utfmask[*i]) == utfbyte[*i])
 			return (unsigned char)c & ~utfmask[*i];
+
 	return 0;
 }
 
@@ -30,8 +31,10 @@ static size_t utf8validate(long *u, size_t i)
 {
 	if (!BETWEEN(*u, utfmin[i], utfmax[i]) || BETWEEN(*u, 0xD800, 0xDFFF))
 		*u = UTF_INVALID;
+
 	for (i = 1; *u > utfmax[i]; ++i)
 		;
+
 	return i;
 }
 
@@ -43,16 +46,20 @@ static size_t utf8decode(const char *c, long *u, size_t clen)
 	*u = UTF_INVALID;
 	if (!clen)
 		return 0;
+
 	udecoded = utf8decodebyte(c[0], &len);
 	if (!BETWEEN(len, 1, UTF_SIZ))
 		return 1;
+
 	for (i = 1, j = 1; i < clen && j < len; ++i, ++j) {
 		udecoded = (udecoded << 6) | utf8decodebyte(c[i], &type);
 		if (type)
 			return j;
 	}
+
 	if (j < len)
 		return 0;
+
 	*u = udecoded;
 	utf8validate(u, len);
 
@@ -83,8 +90,10 @@ void drw_resize(Drw *drw, unsigned int w, unsigned int h)
 {
 	drw->w = w;
 	drw->h = h;
+
 	if (drw->drawable)
 		XFreePixmap(drw->dpy, drw->drawable);
+
 	drw->drawable = XCreatePixmap(drw->dpy, drw->root, w, h,
 				      DefaultDepth(drw->dpy, drw->screen));
 }
@@ -172,8 +181,10 @@ void drw_font_free(Fnt *font)
 {
 	if (!font)
 		return;
+
 	if (font->pattern)
 		FcPatternDestroy(font->pattern);
+
 	XftFontClose(font->dpy, font->xfont);
 	free(font);
 }
@@ -187,17 +198,18 @@ Clr *drw_clr_create(Drw *drw, const char *clrname)
 			       DefaultColormap(drw->dpy, drw->screen), clrname,
 			       &clr->rgb))
 		die("error, cannot allocate color '%s'\n", clrname);
+
 	clr->pix = clr->rgb.pixel;
 
 	return clr;
 }
 
-void drw_clr_free(Clr *clr)
+inline void drw_clr_free(Clr *clr)
 {
 	free(clr);
 }
 
-void drw_setscheme(Drw *drw, ClrScheme *scheme)
+inline void drw_setscheme(Drw *drw, ClrScheme *scheme)
 {
 	drw->scheme = scheme;
 }
@@ -269,11 +281,14 @@ void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h,
 {
 	if (!drw->scheme)
 		return;
+	
 	XSetForeground(drw->dpy, drw->gc,
 		       invert ? drw->scheme->bg->pix : drw->scheme->fg->pix);
+
 	if (filled)
 		XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w + 1,
 			       h + 1);
+
 	else if (empty)
 		XDrawRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
 }
@@ -423,6 +438,7 @@ int drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h,
 			}
 		}
 	}
+
 	if (d)
 		XftDrawDestroy(d);
 
