@@ -17,7 +17,10 @@ static const char colors[NUMCOLORS][MAXCOLORS][9] = {
     { "#212121", "#7E62B3", "#121212" },        /* [7]  08 - Dark grey */
     { "#212121", "#899CA1", "#121212" },        /* [8]  09 - grey */
 };
-static const unsigned int gappx = 6; /* gap pixel between windows */ 
+static const unsigned int gappx = 6; /* gap pixel between windows */
+enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
+static const int showtab            = showtab_always; /* Default tab bar show mode */
+static const Bool toptab            = False;    /* False means bottom tab bar */ 
 static const char *fonts[] = {
 	"Terminus Bold:size=12"
 };
@@ -39,7 +42,9 @@ static const Bool systraypinning = True;
 static const Bool systraypinningfailfirst = True;
 
 /* tagging */
-static const char *tags[] = { "web", "prog", "term", "chat", "util", "temp" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+static int def_layouts[1 + LENGTH(tags)]  = { 0, 2, 0, 0, 1, 0, 0, 0, 0, 0};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -51,16 +56,15 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "-@-",      spiral },    /* first entry is default */
-	{ "-F-",      NULL },    /* no layout function means floating behavior */
-	{ "-T-",      tile },
-	{ "-D-",     dwindle },
+	{ "[]",      tile },    /* first entry is default */
+	{ "<><",      NULL },    /* no layout function means floating behavior */
+	{ "\\",      monocle },
 };
 
 /* key definitions */
@@ -93,12 +97,13 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = editorcmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = volcmdp } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = volcmdm } },
-	{ MODKEY|ShiftMask,		XK_l,      spawn,          {.v = xlock } },
+	{ MODKEY|ShiftMask,		          XK_b,      spawn,          {.v = xlock } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_w,      tabmode,        {-1} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_l,      incnmaster,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_h,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -145,5 +150,6 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
 
