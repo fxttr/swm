@@ -48,9 +48,9 @@ static const Bool systraypinning = True;
 static const Bool systraypinningfailfirst = True;
 
 /* tagging */
-static const char *tags[] = {"", "", "", "", ""};
+static const char *tags[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
 
-static int def_layouts[1 + LENGTH(tags)] = {0, 2, 0, 0, 1, 0, 0, 0, 0, 0};
+static int def_layouts[1 + LENGTH(tags)] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 static const Rule rules[] = {
     /* class      instance    title       tags mask     isfloating   monitor */
@@ -92,7 +92,6 @@ static const char *dmenucmd[] = {"dmenu_run", "-m",  dmenumon,    "-fn",
                                  selbgcolor,  "-sf", selfgcolor,  NULL};
 static const char *termcmd[] = {TERM, NULL};
 static const char *filecmd[] = {TERM, "-e", "ranger", NULL};
-static const char *editorcmd[] = {"emacs", NULL};
 static const char *volraisecmd[] = {"pactl", "set-sink-volume",
                                     "@DEFAULT_SINK@", "+5%", NULL};
 static const char *vollowercmd[] = {"pactl", "set-sink-volume",
@@ -107,7 +106,6 @@ static Key keys[] = {
     {MODKEY, XK_p, spawn, {.v = dmenucmd}},
     {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
     {MODKEY | ShiftMask, XK_d, spawn, {.v = filecmd}},
-    {MODKEY | ShiftMask, XK_e, spawn, {.v = editorcmd}},
     {MODKEY, XF86XK_AudioRaiseVolume, spawn, {.v = volraisecmd}},
     {MODKEY, XF86XK_AudioLowerVolume, spawn, {.v = vollowercmd}},
     {MODKEY, XF86XK_AudioMute, spawn, {.v = volmutecmd}},
