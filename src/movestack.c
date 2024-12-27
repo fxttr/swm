@@ -48,7 +48,7 @@ void movestack(const Arg *arg)
 
 		if (selmon->sel == selmon->clients)
 			selmon->clients = c;
-		
+
 		else if (c == selmon->clients)
 			selmon->clients = selmon->sel;
 

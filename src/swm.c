@@ -514,13 +514,13 @@ void buttonpress(XEvent *e)
 		i = x = 0;
 		do
 			x += TEXTW(tags[i]);
-		while ((unsigned int) ev->x >= x && ++i < LENGTH(tags));
+		while ((unsigned int)ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
-		} else if ((unsigned int) ev->x < x + blw)
+		} else if ((unsigned int)ev->x < x + blw)
 			click = ClkLtSymbol;
-		else if ((unsigned int) ev->x > selmon->ww - TEXTW(stext))
+		else if ((unsigned int)ev->x > selmon->ww - TEXTW(stext))
 			click = ClkStatusText;
 		else
 			click = ClkWinTitle;
@@ -529,14 +529,14 @@ void buttonpress(XEvent *e)
 	if (ev->window == selmon->tabwin) {
 		i = 0;
 		x = 0;
-		
+
 		for (c = selmon->clients; c; c = c->next) {
 			if (!ISVISIBLE(c))
 				continue;
 
 			x += selmon->tab_widths[i];
 
-			if ((unsigned int) ev->x > x)
+			if ((unsigned int)ev->x > x)
 				++i;
 			else
 				break;
@@ -1073,7 +1073,7 @@ void drawtab(Monitor *m)
 		for (i = 0; i < m->ntabs; ++i) {
 			if (tot_width +
 				    (m->ntabs - i) * sorted_label_widths[i] >
-			    (unsigned int) m->ww)
+			    (unsigned int)m->ww)
 				break;
 			tot_width += sorted_label_widths[i];
 		}
@@ -2196,7 +2196,7 @@ void tagmon(const Arg *arg)
 		return;
 
 	sendmon(selmon->sel, dirtomon(arg->i));
-	
+
 	focusmon(arg);
 }
 
@@ -2261,9 +2261,10 @@ void tabmode(const Arg *arg)
 
 void togglefloating(const Arg *arg)
 {
-	if (!selmon->sel || selmon->sel->isfullscreen) /* no support for fullscreen windows */
+	if (!selmon->sel ||
+	    selmon->sel->isfullscreen) /* no support for fullscreen windows */
 		return;
-		
+
 	selmon->sel->isfloating = !selmon->sel->isfloating ||
 				  selmon->sel->isfixed;
 
@@ -2297,7 +2298,7 @@ void toggleview(const Arg *arg)
 	int i;
 
 	if (newtagset) {
-		if (newtagset == (unsigned int) ~0) {
+		if (newtagset == (unsigned int)~0) {
 			selmon->pertag->prevtag = selmon->pertag->curtag;
 			selmon->pertag->curtag = 0;
 		}
@@ -2796,7 +2797,7 @@ void view(const Arg *arg)
 	if (arg->ui & TAGMASK) {
 		selmon->pertag->prevtag = selmon->pertag->curtag;
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
-		if (arg->ui == (unsigned int) ~0)
+		if (arg->ui == (unsigned int)~0)
 			selmon->pertag->curtag = 0;
 		else {
 			for (i = 0; !(arg->ui & 1 << i); i++)
@@ -2843,7 +2844,7 @@ Monitor *wintomon(Window w)
 
 	if (w == root && getrootptr(&x, &y))
 		return recttomon(x, y, 1, 1);
-	
+
 	for (m = mons; m; m = m->next)
 		if (w == m->barwin || w == m->tabwin)
 			return m;

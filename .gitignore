@@ -6,3 +6,5 @@ swm
 result
 compile_commands.json
 *.o
+result/
+.direnv/
